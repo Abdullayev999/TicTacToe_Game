@@ -2,6 +2,10 @@
 
 namespace TicTacToe_Game
 {
+    /*
+       + Реализовать игру Крестик-Нолик
+       + Возможность с откатом назад
+    */
     class TicTacToe
     {
         private List<int> History { get; set; }
