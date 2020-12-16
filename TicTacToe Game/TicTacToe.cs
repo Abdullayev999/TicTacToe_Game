@@ -1,14 +1,35 @@
-﻿namespace TicTacToe_Game
+﻿using System.Collections.Generic;
+
+namespace TicTacToe_Game
 {
     class TicTacToe
     {
+        private List<int> History { get; set; }
         private char[] Board { get; set; }
         private const int Count = 9;
         public TicTacToe()
         {
+            History = new List<int>();
+
             Board = new char[Count] { ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', };
+            
         }
-        public bool ChekWin(char symbl)
+
+        public bool BackHistory()
+        {
+            if (History.Count > 0)
+            {
+                int count = History.Count - 1;
+                int number = History[count];
+                History.RemoveAt(count);
+
+                Board[number] = ' ';
+
+                return true;
+            }
+            return false;
+        }
+        public bool CheckWin(char symbl)
         {
             for (int i = 0; i < 7; i += 3)// check horizontally
             {
@@ -40,6 +61,7 @@
                 if (Board[x] == ' ')
                 {
                     Board[x] = symbl;
+                    History.Add(x);
                     return true;
                 }
             }

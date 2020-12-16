@@ -6,14 +6,13 @@ namespace TicTacToe_Game
     {
         static void Main(string[] args)
         {
-            TicTacToe tmp = new TicTacToe();
-            Console.WriteLine(tmp);
+            TicTacToe game = new TicTacToe();
             int count = 0;
             char symbl;
             do
             {
-                Console.Clear();
-                Console.WriteLine(tmp);
+                
+                Console.WriteLine(game);
 
                 if (count % 2 == 0)
                 {
@@ -26,32 +25,40 @@ namespace TicTacToe_Game
                     symbl = 'Y';
                 }
 
-                Console.Write("\nEner num (0-9) : ");
+                Console.Write("\n99 - step back\nEner num (0-9) : ");
                 int.TryParse(Console.ReadLine(), out int num);
-
-                if (count % 2 == 0)
+                Console.Clear();
+                if (num==99)
                 {
-                    if (tmp.MakeMove(num, symbl))
+                    if (game.BackHistory())
+                    {
+                        count--;
+                    }
+                    else { Console.WriteLine("Don't back"); }
+                }else if (count % 2 == 0)
+                {
+                    if (game.MakeMove(num, symbl))
                     {
                         count++;
-                        if (tmp.ChekWin('X')) break;
+                        if (game.CheckWin('X')) break;
                     }
                     else Console.WriteLine("Number entered incorrectly");
                 }
                 else
                 {
-                    if (tmp.MakeMove(num, symbl))
+                    if (game.MakeMove(num, symbl))
                     {
                         count++;
-                        if (tmp.ChekWin('Y')) break;
+                        if (game.CheckWin('Y')) break;
                     }
                     else Console.WriteLine("Number entered incorrectly");
 
                 }
+                
             } while (true);
 
             Console.Clear();
-            Console.WriteLine(tmp);
+            Console.WriteLine(game);
             Console.WriteLine($"{symbl} is win!!!");
         }
     }
